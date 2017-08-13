@@ -1,0 +1,46 @@
+<div  id="singleMatch" class="container single-match" ng-init="currentMatch1.loadSingleMatch()">
+
+	<div class="row">
+
+		<div class="match-round col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	    	{{currentMatch1.currentMatchDetails.round}}&nbsp;-&nbsp;{{currentMatch1.currentMatchDetails.date | date:'fullDate'}}
+	    </div>
+
+	</div>
+	
+	<div class="row second-row">
+		
+		<div class="match-image1 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+			<img ng-src='{{"img/" + currentMatch1.currentMatchDetails.team1.split(" ").join("").toLowerCase() + ".svg"}}'>&emsp;
+			<span class="hidden-xs">{{currentMatch1.currentMatchDetails.team1}}</span><span class="hidden-sm hidden-md hidden-lg">{{currentMatch1.currentMatchDetails.code1}}</span>
+		</div>
+
+		<div class="match-score col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			{{currentMatch1.currentMatchDetails.score1}}&nbsp;-&nbsp;{{currentMatch1.currentMatchDetails.score2}}
+		</div>
+
+		<div class="match-image2 col-xs-5 col-sm-5 col-md-5 col-lg-5">
+			
+			<span class="hidden-xs">{{currentMatch1.currentMatchDetails.team2}}</span><span class="hidden-sm hidden-md hidden-lg">{{currentMatch1.currentMatchDetails.code2}}</span>&emsp;<img ng-src='{{"img/" + currentMatch1.currentMatchDetails.team2.split(" ").join("").toLowerCase() + ".svg"}}'>
+		</div>
+
+	</div>
+
+	<div class="row third-row">
+		
+		<div class="match-result col-xs-12 col-sm-12 col-md-12 col-lg-12">{{currentMatch1.matchWinner}}</div>
+
+	</div>
+
+	<div class="row row-space">
+        
+        <div class="col-xs-12 col-sm-10 col-md-12 col-lg-12">
+			
+			<a ng-click="" class="btn btn-primary" data-ng-href="#/matches" data-target="#matches" role="button">All Matches&nbsp;<i class="fa 
+			fa-angle-double-left" aria-hidden="true"></i></a>
+
+		</div>
+         
+    </div>
+      
+</div>

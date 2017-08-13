@@ -1,0 +1,98 @@
+<div id="allclubs" class="container allmatches" ng-init="matchResult.loadData()" ng-cloak>
+
+    <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              
+            <label>Filter By Seasons</label> 
+
+            <select id="seasonSelected" ng-model="matchResult.season" ng-change="matchResult.checkSeason(matchResult.season)">
+                 
+              <option value="{{x}}" ng-repeat="x in matchResult.years">{{x}}</option>
+
+            </select>
+
+        </div>
+             
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              
+            <label>Filter By MatchDays</label> 
+
+            <select ng-model="matchResult.matchDay">
+                
+              <option ng-repeat="day in matchResult.matchDays track by $index" value="{{day}}">{{day}}</option>
+               
+            </select>
+          
+        </div>
+               
+    </div>
+        
+    <div class="row row-space">
+            
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+               
+            <label>Filter By Clubs</label> 
+               
+            <select id="selectedClub" ng-model= "matchResult.clubs" ng-change="matchResult.checkClub(matchResult.clubs)">
+              
+              <option value="{{club}}" ng-repeat="club in matchResult.teamsNames | orderBy: 'toString()'">{{club}}</option>
+            
+            </select>
+
+       </div>
+
+    </div>
+       
+    <div class="row row-space">
+       
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+
+          <a ng-click="matchResult.resetAllFilters()" class="btn btn-primary" data-ng-href="#/matches" data-target="#matches" role="button">Reset All&nbsp;<i class="fa fa-refresh" aria-hidden="true"></i></a>
+
+        </div>
+         
+    </div>
+       
+ 
+  <div  class="matches" ng-repeat="round1 in matchResult.rounds1 | filter: ((matchResult.matchDay == 'All Matchdays') ? undefined : (matchResult.matchDay)):true ">
+              
+    <div class="round-name">{{round1.name}}<br><hr></div>
+          
+    <div ng-repeat="match1 in round1.matches | filter: ((matchResult.clubs != 'All Clubs') ? (matchResult.clubs) : '')">
+          
+        <div class="date-num">{{(round1.matches[$index].date != round1.matches[$index - 1].date) ? (round1.matches[$index].date | date:'fullDate'): ""}}
+             
+        </div>
+
+        <a ng-click="matchResult.passInfo(round1.name,round1.matches[$index].date, match1.team1.name, match1.score1, match1.score2, match1.team2.name, match1.team1.code, match1.team2.code)" data-ng-href="#/matches/{{match1.team1.code}}{{match1.team2.code}}{{round1.matches[$index].date.split('-').join('')}}" data-target="#matches/{{match1.team1.code}}{{match1.team2.code}}{{round1.matches[$index].date.split('-').join('')}}">
+                    
+        <div class="panel panel-default">
+
+          <div class="panel-body match-data">
+      			
+      			<div class="row">
+      			
+      			   <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4 matchteam1">{{match1.team1.name}}</div>
+      			
+               <div class="hidden-xs col-sm-1 col-md-1 col-lg-1 matchimage1"><img width= "25px" height= "25px" ng-src='{{"img/" + match1.team1.name.split(" ").join("").toLowerCase() + ".svg"}}'></div>
+      			
+               <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 matchscore">{{match1.score1}} - {{match1.score2}}</div>
+               
+               <div class="hidden-xs col-sm-1 col-md-1 col-lg-1 matchimage2"><img width= "25px" height= "25px" ng-src='{{"img/" + match1.team2.name.split(" ").join("").toLowerCase() + ".svg"}}'></div>    
+      			  
+               <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4 matchteam2">{{match1.team2.name}}</div>
+
+            </div>
+            
+          </div>
+  		
+      </div>
+          
+      </a>
+      
+    </div>
+    
+  </div>
+
+</div>
